@@ -21,7 +21,7 @@ import { UserRegistrationFormComponent } from './user-registration-form/user-reg
 @NgModule({
   declarations: [
     AppComponent,
-    // UserRegistrationFormComponent,
+    UserRegistrationFormComponent,
    
   ],
   imports: [
