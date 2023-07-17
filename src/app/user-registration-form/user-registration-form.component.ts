@@ -10,19 +10,22 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-registration-form',
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss']
 })
-export class UserRegistrationFormComponent {
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+export class UserRegistrationFormComponent implements OnInit{
+  @Input() userData = { Username: '', Password: '' };
 
   constructor(
       public fetchApiData: FetchApiDataService,
       public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
-      public snackBar: MatSnackBar) { }
+      public snackBar: MatSnackBar,
+      private router: Router
+      ) { }
   
   ngOnInit(): void {
   }

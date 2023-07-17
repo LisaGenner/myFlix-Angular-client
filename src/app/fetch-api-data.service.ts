@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 const apiUrl = 'https://myflix-20778.herokuapp.com';
 @Injectable({
@@ -25,7 +24,7 @@ export class FetchApiDataService {
 
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+    return this.http.post(apiUrl + 'login', userDetails).pipe(
     catchError(this.handleError)
     );
   }
@@ -33,9 +32,12 @@ export class FetchApiDataService {
 //api call for all movies
 getAllMovies(): Observable<any> {
   const token = localStorage.getItem('token');
-  return this.http.get<Response>(apiUrl + 'movies', {headers: new HttpHeaders({
-      Authorization: 'Bearer ' + token,
-    })}).pipe(
+  return this.http.get<Response>(apiUrl + 'movies', {
+    headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })
+  }).pipe(
     map(this.extractResponseData),
     catchError(this.handleError)
   );
@@ -43,14 +45,17 @@ getAllMovies(): Observable<any> {
 //api call for one movie endpoint
 getOneMovie(title: string): Observable<any> {
   const token = localStorage.getItem('token');
-  return this.http.get<Response>(apiUrl + 'movies/' + title, {headers: new HttpHeaders(
-    {
-      Authorization: 'Bearer ' + token,
-    })}).pipe(
-      map(this.extractResponseData),
+  return this.http.get<Response>(apiUrl + 'movies/' + title, {
+    headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })
+  }).pipe(
+    map(this.extractResponseData),
     catchError(this.handleError)
   );
 }
+
 //api call for one director endpoint
 getOnedirector(directorName: string): Observable<any> {
   const token = localStorage.getItem('token');
@@ -154,16 +159,19 @@ private extractResponseData(res: Response): any {
 
 
 private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
+  if (error.error instanceof ErrorEvent) {
     console.error('Some error occurred:', error.error.message);
-    } else {
-    console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
-    }
-    return throwError(() =>
-    'Something bad happened; please try again later.');
   }
+  else if (error.error.errors) {
+    return throwError(() => new Error(error.error.errors[0].msg));
+  }
+  else {
+    console.error(
+      `Error Status code ${error.status}, ` +
+      `Error body is: ${error.error}`);
+  }
+  return throwError(() => new Error('Something bad happened; please try again later.'));
+}
 }
 
 
