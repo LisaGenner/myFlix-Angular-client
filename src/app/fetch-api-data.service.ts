@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-const apiUrl = 'https://myflix-20778.herokuapp.com';
+const apiUrl = 'https://myflix-20778.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
