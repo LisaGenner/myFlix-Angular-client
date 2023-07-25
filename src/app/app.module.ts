@@ -13,20 +13,29 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { AppRoutingModule } from './app-routing.module';
+import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
-import { MovieCardComponent } from './movie-card/movie-card.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+// import { NavigationComponent } from './navigation/navigation.component';
+// import { MovieInfoComponent } from './movie-info/movie-info.component';
+// import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
-    MovieCardComponent,
     UserLoginFormComponent,
-   
+    MovieCardComponent,
+    WelcomePageComponent,
+    // NavigationComponent,
+    // MovieInfoComponent,
+    // UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +53,9 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     MatGridListModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatListModule,
+    MatProgressSpinnerModule,
     
-  
-
   ],
   providers: [],
   bootstrap: [AppComponent]
