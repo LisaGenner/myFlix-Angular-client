@@ -29,6 +29,7 @@ export class FetchApiDataService {
     );
   }
 
+  
 //api call for all movies
 getAllMovies(): Observable<any> {
   const token = localStorage.getItem('token');
@@ -57,7 +58,7 @@ getOneMovie(title: string): Observable<any> {
 }
 
 //api call for one director endpoint
-getOnedirector(directorName: string): Observable<any> {
+getDirector(directorName: string): Observable<any> {
   const token = localStorage.getItem('token');
   return this.http.get<Response>(apiUrl + 'movies/director' + directorName, {headers: new HttpHeaders(
     {
@@ -68,7 +69,7 @@ getOnedirector(directorName: string): Observable<any> {
   );
 }
 //api call for one genre endpoint
-getOnegenre(genreName: string): Observable<any> {
+getGenre(genreName: string): Observable<any> {
   const token = localStorage.getItem('token');
   return this.http.get<Response>(apiUrl + 'movies/genre' + genreName, {headers: new HttpHeaders(
     {
@@ -80,7 +81,7 @@ getOnegenre(genreName: string): Observable<any> {
 }
 
 // api call for the get one user endpoint
-getOneUser(): Observable<any> {
+getUser(): Observable<any> {
   const username = localStorage.getItem('username');
   const token = localStorage.getItem('token');
   return this.http.get<Response>(apiUrl + 'users/' + username, {
@@ -122,6 +123,21 @@ deleteUser(): Observable<any> {
   );
 }
 
+// getFavoriteMovies(): Observable<any> {
+//   const token = localStorage.getItem('token');
+//   const user = JSON.parse(localStorage.getItem('user') || '{}');
+//   return this.http.get(apiUrl + 'users/' + user.Username, {
+//     headers: new HttpHeaders(
+//       {
+//         Authorization: 'Bearer ' + token,
+//       })
+//   }).pipe(
+//     map(this.extractResponseData),
+//     map((data) => data.FavoriteMovies),
+//     catchError(this.handleError)
+//   );
+// }
+
 //api call for favorite movie endpoint
 addFavoriteMovie(movieId: string): Observable<any> {
   const username = localStorage.getItem('username');
@@ -134,6 +150,11 @@ addFavoriteMovie(movieId: string): Observable<any> {
       map(this.extractResponseData),
     catchError(this.handleError)
   );
+}
+
+isFavoriteMovie(movieID: string): boolean {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  return user.FavoriteMovies.indexOf(movieID) >= 0;
 }
 
 //api call for favorite movie endpoint
@@ -155,8 +176,6 @@ private extractResponseData(res: Response): any {
   const body = res;
   return body || { };
 }
-
-
 
 private handleError(error: HttpErrorResponse): any {
   if (error.error instanceof ErrorEvent) {

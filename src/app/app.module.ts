@@ -23,8 +23,16 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 // import { NavigationComponent } from './navigation/navigation.component';
-// import { MovieInfoComponent } from './movie-info/movie-info.component';
+
 // import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RouterModule, Routes } from '@angular/router';
+import { MovieInfoComponent } from './movie-info/movie-info.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { GenreComponent } from './genre/genre.component';
+import { DirectorComponent } from './director/director.component';
+import { UserFavoriteMoviesComponent } from './user-favorite-movies/user-favorite-movies.component';
+
 
 @NgModule({
   declarations: [
@@ -33,8 +41,14 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     UserLoginFormComponent,
     MovieCardComponent,
     WelcomePageComponent,
+    MovieInfoComponent,
+    UserProfileComponent,
+    NavigationComponent,
+    GenreComponent,
+    DirectorComponent,
+    UserFavoriteMoviesComponent,
     // NavigationComponent,
-    // MovieInfoComponent,
+ 
     // UserProfileComponent
   ],
   imports: [
@@ -55,8 +69,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     MatTooltipModule,
     MatListModule,
     MatProgressSpinnerModule,
-    
+    MatIconModule,    
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
