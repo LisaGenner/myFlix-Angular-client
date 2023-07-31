@@ -12,8 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-favorite-movies.component.scss']
 })
 export class UserFavoriteMoviesComponent {
-  favorites: any[] = [];
-  favoriteMovies: any[] = [];
+  favorites: any = [];
+  favoriteMovies: any = [];
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -21,16 +21,16 @@ export class UserFavoriteMoviesComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getFavoriteMovies();
+    this.getFavorites();
   }
 
-  getFavoriteMovies(): void {
+  getFavorites(): void {
     this.favorites, this.favoriteMovies = [];
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
       this.favorites.map((favorite: any) => {
         console.log(favorite);
-        this.fetchApiData.getOneMovie(favorite).subscribe((resp: any) => {
+        this.fetchApiData.getMovies(favorite).subscribe((resp: any) => {
           this.favoriteMovies.push(resp);
         });
       });
@@ -87,7 +87,7 @@ export class UserFavoriteMoviesComponent {
   }
 
   // Open movie details from MovieInfoComponent
-  openSummary(title: string, description: string): void {
+  openSynopsis(title: string, description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
         Title: title,

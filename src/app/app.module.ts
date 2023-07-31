@@ -15,24 +15,29 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { AppRoutingModule } from './app-routing.module';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { MatDialogRef } from '@angular/material/dialog';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-// import { NavigationComponent } from './navigation/navigation.component';
-
-// import { UserProfileComponent } from './user-profile/user-profile.component';
-import { RouterModule, Routes } from '@angular/router';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { UserFavoriteMoviesComponent } from './user-favorite-movies/user-favorite-movies.component';
+import { DialogModule } from '@angular/cdk/dialog';
 
+const appRoutes: Routes = [
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: UserProfileComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' }
+]
 
 @NgModule({
   declarations: [
@@ -47,9 +52,8 @@ import { UserFavoriteMoviesComponent } from './user-favorite-movies/user-favorit
     GenreComponent,
     DirectorComponent,
     UserFavoriteMoviesComponent,
-    // NavigationComponent,
- 
-    // UserProfileComponent
+    NavigationComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -69,10 +73,18 @@ import { UserFavoriteMoviesComponent } from './user-favorite-movies/user-favorit
     MatTooltipModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatIconModule,    
+    MatIconModule,
+    RouterModule.forRoot(appRoutes)    
   ],
 
-  providers: [],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+    DialogModule
+  ],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

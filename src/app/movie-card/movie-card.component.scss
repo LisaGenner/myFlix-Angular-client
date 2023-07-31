@@ -7,9 +7,11 @@ movie-view {
   }
   .movie-card {
     margin-top: .35em;
-    width: 30vw;
+    width: 25vw;
+    height: 25vw;
     justify-self: center;
     justify-content: center;
+ 
   }
   .mat-mdc-card-header {
     padding: 0 .5em .25em;
@@ -19,6 +21,7 @@ movie-view {
   }
   .movie-card > img {
     height: 70%;
+    padding-right: 80px;
   }
   .mdc-card__actions {
     display: block;
@@ -55,3 +58,4 @@ movie-view {
     
     .movie-card { width: 20vw; }
   }
+ 

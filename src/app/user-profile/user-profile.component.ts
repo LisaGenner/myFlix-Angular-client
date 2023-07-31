@@ -33,19 +33,20 @@ export class UserProfileComponent implements OnInit {
   *  get all movies will filter all of the movies id that are in the favorite movies array. 
  */
 
-  getUser(): void {
-    this.fetchApiData.getUser().subscribe((response: any) => {
-      this.user = response;
-      this.userData.Username = this.user.Username;
-      this.userData.Email = this.user.Email;
-      this.user.Birthday = formatDate(this.user.Birthday, 'MM-dd-yyyy', 'en-US', 'UTC+0');
+ getUser(): void {
+  this.fetchApiData.getUser().subscribe((response: any) => {
+    this.user = response;
+    this.userData.Username = this.user.Username;
+    this.userData.Email = this.user.Email;
+    this.user.Birthday = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US', 'UTC+0');
 
 
-      this.fetchApiData.getAllMovies().subscribe((response: any) => {
-        this.favoriteMovies = response.filter((m: { _id: any }) => this.user.FavoriteMovies.indexOf(m._id) >= 0)
-      })
+    this.fetchApiData.getAllMovies().subscribe((response: any) => {
+      this.favoriteMovies = response.filter((m: { _id: any }) => this.user.FavoriteMovies.indexOf(m._id) >= 0)
     })
-  }
+  })
+}
+
 
   /**
    * edit user will take the new user data and send it back to the db and set the localstorage 
@@ -54,7 +55,7 @@ export class UserProfileComponent implements OnInit {
     this.fetchApiData.editUser(this.userData).subscribe((data) => {
       localStorage.setItem('user', JSON.stringify(data));
       localStorage.setItem('Username', data.Username);
-      // console.log(data);
+      console.log(data);
       this.snackBar.open('User has been updated', 'OK', {
         duration: 2000
       })

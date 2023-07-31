@@ -91,7 +91,7 @@ export class MovieCardComponent {
   }
 
   // Open movie info from MovieInfoComponent
-  openSummary(title: string, description: string): void {
+  openSynopsis(title: string, description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
         Title: title,

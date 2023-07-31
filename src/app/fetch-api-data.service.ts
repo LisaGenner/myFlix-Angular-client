@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 const apiUrl = 'https://myflix-20778.herokuapp.com/';
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root' })
 
 export class FetchApiDataService {
   // Inject the HttpClient module to the constructor params
@@ -15,20 +14,19 @@ export class FetchApiDataService {
   }
 
  // Making the api call for the user registration endpoint
-  public userRegistration(userDetails: any): Observable<any> {
+  userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(
     catchError(this.handleError)
     );
   }
 
-  public userLogin(userDetails: any): Observable<any> {
+  userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'login', userDetails).pipe(
     catchError(this.handleError)
     );
   }
-
   
 //api call for all movies
 getAllMovies(): Observable<any> {
@@ -44,7 +42,7 @@ getAllMovies(): Observable<any> {
   );
 }
 //api call for one movie endpoint
-getOneMovie(title: string): Observable<any> {
+getMovies(title: string): Observable<any> {
   const token = localStorage.getItem('token');
   return this.http.get<Response>(apiUrl + 'movies/' + title, {
     headers: new HttpHeaders(
@@ -123,19 +121,20 @@ deleteUser(): Observable<any> {
   );
 }
 
-// getFavoriteMovies(): Observable<any> {
+// getFavorites(): Observable<any> {
+//   const username = localStorage.getItem('user');
 //   const token = localStorage.getItem('token');
-//   const user = JSON.parse(localStorage.getItem('user') || '{}');
-//   return this.http.get(apiUrl + 'users/' + user.Username, {
-//     headers: new HttpHeaders(
-//       {
+//   return this.http
+//     .get(`${apiUrl}/users/${username}`, {
+//       headers: new HttpHeaders({
 //         Authorization: 'Bearer ' + token,
-//       })
-//   }).pipe(
-//     map(this.extractResponseData),
-//     map((data) => data.FavoriteMovies),
-//     catchError(this.handleError)
-//   );
+//       }),
+//     })
+//     .pipe(
+//       map(this.extractResponseData),
+//       map((data) => data.FavoriteMovies),
+//       catchError(this.handleError)
+//     );
 // }
 
 //api call for favorite movie endpoint
@@ -152,10 +151,10 @@ addFavoriteMovie(movieId: string): Observable<any> {
   );
 }
 
-isFavoriteMovie(movieID: string): boolean {
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  return user.FavoriteMovies.indexOf(movieID) >= 0;
-}
+// isFavoriteMovie(movieID: string): boolean {
+//   const user = JSON.parse(localStorage.getItem('user') || '{}');
+//   return user.FavoriteMovies.indexOf(movieID) >= 0;
+// }
 
 //api call for favorite movie endpoint
 deleteFavoriteMovie(movieId: string): Observable<any> {

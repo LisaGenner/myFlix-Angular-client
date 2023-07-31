@@ -3,11 +3,10 @@
 <div class="profile-container">
     <div class="info-container ">
         <div class="info">
-            <h1>profile </h1>
+            <h1>Profile</h1>
             <p>Username: {{user.Username}} </p>
             <p>Email: {{user.Email}}</p>
-
-            <h2>favorite movies</h2>
+            <h2>Favorite movies</h2>
             <div *ngIf="favoriteMovies.length === 0">
                 <p>your list is empty</p>
             </div>
@@ -19,48 +18,52 @@
             </mat-list-item>
         </mat-list>
     </div>
-
-    
-    <form>
-        <h1>update profile</h1>
-
+    <form class="userInfo">
+        <h2>Update profile</h2>
         <br>
-
-        <mat-form-field class="item-a">
-            <mat-label> Name</mat-label>
-            <input matInput [(ngModel)]="userData.Name" type="text" name="Name">
+        <mat-form-field >
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="userData.Name" 
+            type="text" 
+            name="Name">
         </mat-form-field>
 
-        <mat-form-field class="item-b">
-            <mat-label> Username </mat-label>
-            <input matInput [(ngModel)]="userData.Username" type="text" name="Username">
+        <mat-form-field >
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="userData.Username" 
+            type="text" 
+            name="Username">
         </mat-form-field>
 
-        <mat-form-field class="item-c">
+        <mat-form-field >
             <mat-label>Password</mat-label>
-            <input matInput [(ngModel)]="userData.Password" type="password" placeholder="Password" name="Password"
+            <input matInput [(ngModel)]="userData.Password" 
+            type="password" 
+            placeholder="Password" 
+            name="Password"
                 required>
         </mat-form-field>
 
-        <mat-form-field class="item-d">
+        <mat-form-field >
             <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="userData.Email" type="email" name="Email">
+            <input matInput [(ngModel)]="userData.Email" 
+            type="email" 
+            name="Email">
         </mat-form-field>
 
-        <mat-form-field class="item-e">
+        <mat-form-field >
             <mat-label>Birthday</mat-label>
-            <input matInput [(ngModel)]="userData.Birthday" type="date" name="Birthday">
+            <input matInput [(ngModel)]="userData.Birthday" 
+            type="date" 
+            name="Birthday">
         </mat-form-field>
-
-        <br>
-
-        <button class="item-f" mat-raised-button color="primary" (click)="editUser()">
-            update
-        </button>
-
-        <button class="item-g" mat-button color="warn" (click)="deleteUser()">
-            delete account
-        </button>
     </form>
-
+  <mat-card-actions class="user-profile-actions">
+        <button mat-raised-button (click)="editUser()" color="primary" >
+            Update Profile
+        </button>
+        <button mat-button  (click)="deleteUser()" color="warn">
+            Delete account
+        </button>
+    </mat-card-actions>
 </div>

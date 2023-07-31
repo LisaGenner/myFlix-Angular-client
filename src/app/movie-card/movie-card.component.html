@@ -1,6 +1,6 @@
 <!-- src/app/movie-card/movie-card.component.html -->
 <app-navigation />
-<div class="movie-view">
+<div style="display: flex;">
     <mat-card *ngFor="let movie of movies" class="movie-card">
       <mat-card-header>
         <mat-card-title><h2>{{ movie.Title }}</h2></mat-card-title>
@@ -12,10 +12,10 @@
       <mat-card-actions>
         <button
           mat-button
-          (click)="openSummary(movie.Title, movie.Description)"
+          (click)="openSynopsis(movie.Title, movie.Description)"
           color="basic"
         >
-          Summary
+          Synopsis
         </button>
         <button
           mat-button
