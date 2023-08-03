@@ -7,13 +7,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-movie-card',
-  templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss'],
+  selector: 'app-user-favorite-movies',
+  templateUrl: './user-favorite-movies.component.html',
+  styleUrls: ['./user-favorite-movies.component.scss']
 })
-export class MovieCardComponent {
-  movies: any[] = [];
-  favorites: any[] = [];
+export class UserFavoriteMoviesComponent {
+  favorites: any = [];
+  favoriteMovies: any = [];
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -21,33 +21,29 @@ export class MovieCardComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getMovies();
     this.getFavorites();
   }
 
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      return this.movies;
-    });
-  }
-
-  // Fetch user info and set favorites
   getFavorites(): void {
+    this.favorites, this.favoriteMovies = [];
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
-      return this.favorites;
+      this.favorites.map((favorite: any) => {
+        console.log(favorite);
+        this.fetchApiData.getMovies(favorite).subscribe((resp: any) => {
+          this.favoriteMovies.push(resp);
+        });
+      });
     });
   }
 
-   // check if a movie is a user's favorite
+  // check if a movie is a user's favorite
   isFavorite(id: string): boolean {
     return this.favorites.includes(id);
   }
 
   // add a movie to a user's favorites
   addToFavorites(id: string): void {
-    console.log(id);
     this.fetchApiData.addFavoriteMovie(id).subscribe((result) => {
       this.snackBar.open('Movie added to favorites', 'OK', {
         duration: 2000,
@@ -57,7 +53,7 @@ export class MovieCardComponent {
   }
 
   // Removes a movie from a user's favorites
-  deleteFavorites(id: string): void {
+  removeFromFavorites(id: string): void {
     console.log(id);
     this.fetchApiData.deleteFavoriteMovie(id).subscribe((result) => {
       this.snackBar.open('Movie removed from favorites', 'OK', {
@@ -90,7 +86,7 @@ export class MovieCardComponent {
     });
   }
 
-  // Open movie info from MovieInfoComponent
+  // Open movie details from MovieInfoComponent
   openSynopsis(title: string, description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
@@ -101,3 +97,6 @@ export class MovieCardComponent {
     });
   }
 }
+
+
+

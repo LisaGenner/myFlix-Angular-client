@@ -1,4 +1,4 @@
-.registration-card {
+.login-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,9 +7,10 @@
   
   .mat-mdc-form-field {
     display: block;
+
   }
   
- .button {
+.button {
     width: 100%;
     margin-bottom: 1.5em;
     justify-content: center;
