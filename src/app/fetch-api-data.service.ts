@@ -80,7 +80,9 @@ getGenre(genreName: string): Observable<any> {
 
 // api call for the get one user endpoint
 getUser(): Observable<any> {
-  const username = localStorage.getItem('username');
+  const userObj = localStorage.getItem('user');
+  const userJson = JSON.parse(userObj || "{}");
+  const username = userJson.Username;
   const token = localStorage.getItem('token');
   return this.http.get<Response>(apiUrl + 'users/' + username, {
     headers: new HttpHeaders(
@@ -95,7 +97,7 @@ getUser(): Observable<any> {
 
 // api call for the edit user endpoint
 editUser(updatedUser: any): Observable<any> {
-  const username = localStorage.getItem('username');
+  const username = localStorage.getItem('user');
   const token = localStorage.getItem('token');
   return this.http.get<Response>(apiUrl + 'users/' + updatedUser, {
     headers: new HttpHeaders(
@@ -121,25 +123,38 @@ deleteUser(): Observable<any> {
   );
 }
 
-//api call for favorite movie endpoint
-addFavoriteMovie(movieId: string): Observable<any> {
-  const userObj = localStorage.getItem('user');
-  const userJson = JSON.parse(userObj || "{}");
-  const username = userJson.Username;
+// api call for favorite movie endpoint
 
-  const token = localStorage.getItem('token');
-  return this.http.post<Response>(apiUrl + 'users/' + username + '/movies/' + movieId,
-    {},
-    {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-}
+addFavoriteMovie(movieId: string): Observable<any> {
+    const userObj = localStorage.getItem('user');
+    const userJson = JSON.parse(userObj || "{}");
+    const username = userJson.Username;
+
+    const token = localStorage.getItem('token');
+    return this.http.post<Response>(apiUrl + 'users/' + username + '/movies/' + movieId,
+      {},
+      {
+        headers: new HttpHeaders(
+          {
+            Authorization: 'Bearer ' + token,
+          })
+      }).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
+
+// addFavoriteMovie(movieId: string): Observable<any> {
+//   const username = localStorage.getItem('username');
+//   const token = localStorage.getItem('token');
+//   return this.http.get<Response>(apiUrl + + 'users/' + username + '/movies/' + movieId,
+//   {headers: new HttpHeaders(
+//     {
+//       Authorization: 'Bearer ' + token,
+//     })}).pipe(
+//     catchError(this.handleError)
+//     );
+//   }
 
 isFavoriteMovie(movieID: string): boolean {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -148,17 +163,36 @@ isFavoriteMovie(movieID: string): boolean {
 
 //api call for favorite movie endpoint
 deleteFavoriteMovie(movieId: string): Observable<any> {
-  const username = localStorage.getItem('username');
-  const token = localStorage.getItem('token');
-  return this.http.get<Response>(apiUrl + + 'users/' + username + '/movies/' + movieId,
-  {headers: new HttpHeaders(
-    {
-      Authorization: 'Bearer ' + token,
-    })}).pipe(
-      map(this.extractResponseData),
-    catchError(this.handleError)
-  );
-}
+  const userObj = localStorage.getItem('user');
+    const userJson = JSON.parse(userObj || "{}");
+    const username = userJson.Username;
+
+    const token = localStorage.getItem('token');
+    return this.http
+    .delete<Response>(apiUrl + 'users/' + username + '/movies/' + movieId,
+            {
+        headers: new HttpHeaders(
+          {
+            Authorization: 'Bearer ' + token,
+          })
+      })
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
+
+//   const username = localStorage.getItem('username');
+//   const token = localStorage.getItem('token');
+//   return this.http.get<Response>(apiUrl + + 'users/' + username + '/movies/' + movieId,
+//   {headers: new HttpHeaders(
+//     {
+//       Authorization: 'Bearer ' + token,
+//     })}).pipe(
+//       map(this.extractResponseData),
+//     catchError(this.handleError)
+//   );
+// }
 
 // Non-typed response extraction
 private extractResponseData(res: Response): any {
