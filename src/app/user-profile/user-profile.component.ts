@@ -33,33 +33,16 @@ export class UserProfileComponent implements OnInit {
   *  get all movies will filter all of the movies id that are in the favorite movies array. 
  */
 
-//  getUser(): void {
-//   this.fetchApiData.getUser().subscribe((response: any) => {
-//     this.user = response;
-//     this.userData.Username = this.user.Username;
-//     this.userData.Email = this.user.Email;
-//     this.user.Birthday = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US', 'UTC+0');
-
-
-//     this.fetchApiData.getAllMovies().subscribe((response: any) => {
-//       this.favoriteMovies = response.filter((m: { _id: any }) => this.user.FavoriteMovies.indexOf(m._id) >= 0)
-//     })
-//   })
-// }
-
-
 getUser(): void {
   this.fetchApiData.getUser().subscribe((response: any) => {
     this.user = response;
     this.userData.Username = this.user.Username;
     this.userData.Email = this.user.Email;
-
     try {
       this.user.Birthday = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US', 'UTC+0');
     } catch(e) {
       console.log(e);
     }
-
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.favoriteMovies = response.filter((m: {_id: any }) => this.user.FavoriteMovies.indexOf(m._id) >= 0)
     })
@@ -87,7 +70,6 @@ getUser(): void {
   /**
    *  delete user will delete their account permanently and be sent back to the welcome screen
    */
-
   deleteUser(): void {
     if (confirm('are you sure?')) {
       this.router.navigate(['welcome']).then(() => {
@@ -105,6 +87,4 @@ getUser(): void {
       });
     }
   }
-
-  
 }
