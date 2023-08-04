@@ -182,18 +182,6 @@ deleteFavoriteMovie(movieId: string): Observable<any> {
       );
   }
 
-//   const username = localStorage.getItem('username');
-//   const token = localStorage.getItem('token');
-//   return this.http.get<Response>(apiUrl + + 'users/' + username + '/movies/' + movieId,
-//   {headers: new HttpHeaders(
-//     {
-//       Authorization: 'Bearer ' + token,
-//     })}).pipe(
-//       map(this.extractResponseData),
-//     catchError(this.handleError)
-//   );
-// }
-
 // Non-typed response extraction
 private extractResponseData(res: Response): any {
   const body = res;
