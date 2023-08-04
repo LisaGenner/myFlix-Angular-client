@@ -16,6 +16,4 @@ constructor(
   ) { }
 
   ngOnInit(): void { }
-
 }
-

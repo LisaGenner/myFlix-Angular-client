@@ -23,5 +23,4 @@ export class NavigationComponent {
     this.router.navigate(['welcome']);
     localStorage.clear();
   }
-
 }

@@ -124,7 +124,6 @@ deleteUser(): Observable<any> {
 }
 
 // api call for favorite movie endpoint
-
 addFavoriteMovie(movieId: string): Observable<any> {
     const userObj = localStorage.getItem('user');
     const userJson = JSON.parse(userObj || "{}");
@@ -144,18 +143,6 @@ addFavoriteMovie(movieId: string): Observable<any> {
       );
   }
 
-// addFavoriteMovie(movieId: string): Observable<any> {
-//   const username = localStorage.getItem('username');
-//   const token = localStorage.getItem('token');
-//   return this.http.get<Response>(apiUrl + + 'users/' + username + '/movies/' + movieId,
-//   {headers: new HttpHeaders(
-//     {
-//       Authorization: 'Bearer ' + token,
-//     })}).pipe(
-//     catchError(this.handleError)
-//     );
-//   }
-
 isFavoriteMovie(movieID: string): boolean {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   return user.FavoriteMovies.indexOf(movieID) >= 0;
@@ -166,7 +153,6 @@ deleteFavoriteMovie(movieId: string): Observable<any> {
   const userObj = localStorage.getItem('user');
     const userJson = JSON.parse(userObj || "{}");
     const username = userJson.Username;
-
     const token = localStorage.getItem('token');
     return this.http
     .delete<Response>(apiUrl + 'users/' + username + '/movies/' + movieId,
@@ -181,18 +167,6 @@ deleteFavoriteMovie(movieId: string): Observable<any> {
         catchError(this.handleError)
       );
   }
-
-//   const username = localStorage.getItem('username');
-//   const token = localStorage.getItem('token');
-//   return this.http.get<Response>(apiUrl + + 'users/' + username + '/movies/' + movieId,
-//   {headers: new HttpHeaders(
-//     {
-//       Authorization: 'Bearer ' + token,
-//     })}).pipe(
-//       map(this.extractResponseData),
-//     catchError(this.handleError)
-//   );
-// }
 
 // Non-typed response extraction
 private extractResponseData(res: Response): any {
@@ -215,5 +189,3 @@ private handleError(error: HttpErrorResponse): any {
   return throwError(() => new Error('Something bad happened; please try again later.'));
 }
 }
-
-
