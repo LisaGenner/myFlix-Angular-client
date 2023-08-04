@@ -129,7 +129,6 @@ addFavoriteMovie(movieId: string): Observable<any> {
     const userObj = localStorage.getItem('user');
     const userJson = JSON.parse(userObj || "{}");
     const username = userJson.Username;
-
     const token = localStorage.getItem('token');
     return this.http.post<Response>(apiUrl + 'users/' + username + '/movies/' + movieId,
       {},
@@ -143,18 +142,6 @@ addFavoriteMovie(movieId: string): Observable<any> {
         catchError(this.handleError)
       );
   }
-
-// addFavoriteMovie(movieId: string): Observable<any> {
-//   const username = localStorage.getItem('username');
-//   const token = localStorage.getItem('token');
-//   return this.http.get<Response>(apiUrl + + 'users/' + username + '/movies/' + movieId,
-//   {headers: new HttpHeaders(
-//     {
-//       Authorization: 'Bearer ' + token,
-//     })}).pipe(
-//     catchError(this.handleError)
-//     );
-//   }
 
 isFavoriteMovie(movieID: string): boolean {
   const user = JSON.parse(localStorage.getItem('user') || '{}');

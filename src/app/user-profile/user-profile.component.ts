@@ -53,13 +53,11 @@ getUser(): void {
     this.user = response;
     this.userData.Username = this.user.Username;
     this.userData.Email = this.user.Email;
-
     try {
       this.user.Birthday = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US', 'UTC+0');
     } catch(e) {
       console.log(e);
     }
-
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.favoriteMovies = response.filter((m: {_id: any }) => this.user.FavoriteMovies.indexOf(m._id) >= 0)
     })
