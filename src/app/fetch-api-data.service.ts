@@ -124,7 +124,6 @@ deleteUser(): Observable<any> {
 }
 
 // api call for favorite movie endpoint
-
 addFavoriteMovie(movieId: string): Observable<any> {
     const userObj = localStorage.getItem('user');
     const userJson = JSON.parse(userObj || "{}");
@@ -170,7 +169,6 @@ deleteFavoriteMovie(movieId: string): Observable<any> {
   const userObj = localStorage.getItem('user');
     const userJson = JSON.parse(userObj || "{}");
     const username = userJson.Username;
-
     const token = localStorage.getItem('token');
     return this.http
     .delete<Response>(apiUrl + 'users/' + username + '/movies/' + movieId,
@@ -207,5 +205,3 @@ private handleError(error: HttpErrorResponse): any {
   return throwError(() => new Error('Something bad happened; please try again later.'));
 }
 }
-
-

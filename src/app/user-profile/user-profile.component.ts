@@ -70,7 +70,6 @@ getUser(): void {
   /**
    *  delete user will delete their account permanently and be sent back to the welcome screen
    */
-
   deleteUser(): void {
     if (confirm('are you sure?')) {
       this.router.navigate(['welcome']).then(() => {
@@ -88,6 +87,4 @@ getUser(): void {
       });
     }
   }
-
-  
 }
