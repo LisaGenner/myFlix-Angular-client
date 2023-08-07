@@ -143,6 +143,23 @@ addFavoriteMovie(movieId: string): Observable<any> {
       );
   }
 
+  getFavoriteMovie(movieId: string): Observable<any> {
+    const userObj = localStorage.getItem('user');
+    const userJson = JSON.parse(userObj || "{}");
+    const username = userJson.Username;
+    const token = localStorage.getItem('token');
+    return this.http.get<Response>(apiUrl + 'users/' + username, 
+            {
+        headers: new HttpHeaders(
+          {
+            Authorization: 'Bearer ' + token,
+          })
+      }).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
+
 isFavoriteMovie(movieID: string): boolean {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   return user.FavoriteMovies.indexOf(movieID) >= 0;
