@@ -6,7 +6,7 @@ movie-view {
     row-gap: 1.65em;
   }
 
-.movie-page {
+.movie-card {
   display: grid;
   align-items: stretch;
   grid-gap: 20px;
@@ -17,13 +17,13 @@ movie-view {
   padding: 40px 20px;
 }
 
-  .movie-card {
-    margin-top: .35em;
-    width: 25vw;
-    height: 25vw;
-    justify-self: center;
-    justify-content: center;
-   }
+  // .movie-card {
+  //   margin-top: .35em;
+  //   width: 25vw;
+  //   height: 25vw;
+  //   justify-self: center;
+  //   justify-content: center;
+  //  }
   .mat-mdc-card-header {
     padding: 0 .5em .25em;
   }
