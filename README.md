@@ -68,3 +68,11 @@ particular genre of the movie will be displayed.
 ● The project contains technical documentation using JSDoc.
 
 ● The project is hosted on GitHub Pages.
+
+# Deploy
+Whenever you make any changes to your application's code, all you need to do is redo Step 1 to generate a new build and push the new code. Both parts will be done automatically by angular-cli-ghpages once you run the command.
+
+Step 1: Build your application (i.e., generate static HTML, CSS, and JavaScript files out of your application so that browsers can interpret them without the need to use any extra tools/plugins). To do so, run the following command, replacing <repository-name> with your own repository name: ng deploy --base-href=/<repository-name>/.
+
+To deploy the app in your browser run "ng serve" in the terminal.  Once published you will be provided the location of the local server for the live development.  
+    i.e. ** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
